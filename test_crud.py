@@ -27,7 +27,7 @@ class Test(unittest.TestCase):
   def waitForClickable(self, xpath):
     self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.XPATH,
         xpath))))
-  
+    
   def goToJobList(self):
     self.driver.get("https://app.clicktime.com/App/ListView/Job/")
 
@@ -63,7 +63,6 @@ class Test(unittest.TestCase):
     #update all properties
     self.driver.implicitly_wait(1)
     self.driver.find_element(By.XPATH, "//*[@id='read-job-accountid']").send_keys("1234")
-    self.driver.find_element(By.XPATH, "//button[@class='btn btn-success save-button']").click()
     self.waitForClickable("//*[@id='edit-job-number']")
     self.driver.find_element(By.ID, "edit-job-number").send_keys("777")
     self.waitForClickable("//*[@id='edit-start-date']")
@@ -75,6 +74,7 @@ class Test(unittest.TestCase):
     self.waitForClickable('//*[@id="edit-status"]/select')
     self.driver.find_element(By.XPATH, '//*[@id="edit-status"]/select/option[2]').click()
     self.driver.implicitly_wait(1)
+    self.driver.find_element(By.XPATH, "//button[@class='btn btn-success save-button']").click()
     #confirm success message
     self.driver.find_element(By.XPATH, '//*[contains(.,"successfully saved")]//*[@class="alert alert-success ng-binding"]')
     
@@ -99,5 +99,3 @@ class Test(unittest.TestCase):
     time.sleep(1)
     self.delete()
     self.driver.implicitly_wait(1)
-    
-
